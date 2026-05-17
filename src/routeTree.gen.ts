@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ResultsRouteImport } from './routes/results'
+import { Route as ReportsRouteImport } from './routes/reports'
 import { Route as ExplainabilityRouteImport } from './routes/explainability'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
@@ -17,6 +18,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const ResultsRoute = ResultsRouteImport.update({
   id: '/results',
   path: '/results',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportsRoute = ReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ExplainabilityRoute = ExplainabilityRouteImport.update({
@@ -39,12 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
   '/explainability': typeof ExplainabilityRoute
+  '/reports': typeof ReportsRoute
   '/results': typeof ResultsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
   '/explainability': typeof ExplainabilityRoute
+  '/reports': typeof ReportsRoute
   '/results': typeof ResultsRoute
 }
 export interface FileRoutesById {
@@ -52,20 +60,28 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
   '/explainability': typeof ExplainabilityRoute
+  '/reports': typeof ReportsRoute
   '/results': typeof ResultsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/explainability' | '/results'
+  fullPaths: '/' | '/dashboard' | '/explainability' | '/reports' | '/results'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/explainability' | '/results'
-  id: '__root__' | '/' | '/dashboard' | '/explainability' | '/results'
+  to: '/' | '/dashboard' | '/explainability' | '/reports' | '/results'
+  id:
+    | '__root__'
+    | '/'
+    | '/dashboard'
+    | '/explainability'
+    | '/reports'
+    | '/results'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DashboardRoute: typeof DashboardRoute
   ExplainabilityRoute: typeof ExplainabilityRoute
+  ReportsRoute: typeof ReportsRoute
   ResultsRoute: typeof ResultsRoute
 }
 
@@ -76,6 +92,13 @@ declare module '@tanstack/react-router' {
       path: '/results'
       fullPath: '/results'
       preLoaderRoute: typeof ResultsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reports': {
+      id: '/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof ReportsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/explainability': {
@@ -106,6 +129,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DashboardRoute: DashboardRoute,
   ExplainabilityRoute: ExplainabilityRoute,
+  ReportsRoute: ReportsRoute,
   ResultsRoute: ResultsRoute,
 }
 export const routeTree = rootRouteImport
