@@ -127,7 +127,7 @@ function Results() {
               <span className="flex items-center gap-1"><span className="size-2 bg-destructive rounded-sm" /> Manipulated</span>
             </div>
           </div>
-          <div className="grid grid-cols-32 gap-1" style={{ gridTemplateColumns: "repeat(32, minmax(0,1fr))" }}>
+          <div className="grid gap-1" style={{ gridTemplateColumns: "repeat(32, minmax(0,1fr))" }}>
             {timeline.map((t) => (
               <div
                 key={t.i}
