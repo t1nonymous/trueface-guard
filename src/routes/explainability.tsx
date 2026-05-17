@@ -58,10 +58,10 @@ function Explainability() {
           <div className="relative aspect-[21/9] overflow-hidden">
             <img src={forensicFrame} alt="Original" className="absolute inset-0 w-full h-full object-cover" />
             <div
-              className="absolute inset-y-0 left-0 overflow-hidden"
-              style={{ width: `${pos}%` }}
+              className="absolute inset-0 overflow-hidden"
+              style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}
             >
-              <img src={forensicFrame} alt="Heatmap" className="w-screen max-w-none h-full object-cover saturate-150" style={{ width: `${100 * (100 / Math.max(pos, 1))}%` }} />
+              <img src={forensicFrame} alt="Heatmap" className="absolute inset-0 w-full h-full object-cover saturate-150" />
               <div className="absolute top-[30%] left-[36%] size-40 rounded-full bg-destructive/50 blur-3xl heatmap-pulse" />
               <div className="absolute top-[42%] left-[48%] size-24 rounded-full bg-primary/60 blur-2xl heatmap-pulse" />
             </div>
